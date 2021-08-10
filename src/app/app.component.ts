@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WikidataService } from './api-services/wikidata.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'timeline-ui';
+  options = [];
+
+  constructor(
+    private wikidataService: WikidataService
+  ) {
+    wikidataService.searchEntities('Britney Spears').subscribe(results => console.log(results));
+  }
+
+
 }
