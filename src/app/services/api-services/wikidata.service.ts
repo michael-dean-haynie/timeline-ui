@@ -9,21 +9,14 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class WikidataService {
-  private wikidataEndpoint = 'https://www.wikidata.org/w/api.php';
+  private wikidataEndpoint = 'http://localhost:3000/entities';
 
   constructor(
     private http: HttpClient
   ) { }
 
   searchEntities(searchString: string): Observable<SearchEntitiesResult[]> {
-    const params = new HttpParams()
-      .set('action', 'wbsearchentities')
-      .set('format', 'json')
-      .set('language', 'en')
-      .set('type', 'item')
-      .set('limit', 10)
-      .set('search', searchString);
-    return this.http.get<SearchEntitiesRespose>(this.wikidataEndpoint, { params })
+    return this.http.post<SearchEntitiesRespose>(this.wikidataEndpoint, { search: searchString })
       .pipe(map(resp => resp.search));
   }
 }
