@@ -24,7 +24,12 @@
 
 <p>Results:</p>
 <p *ngFor="let result of searchResults">
-  <b>{{result.label}}</b>&nbsp;<span>{{result.description}}</span>
+  <ng-container *ngIf="result.sitelinkUrl">
+    <b><a href="{{result.sitelinkUrl}}">{{result.label}}</a></b>&nbsp;{{result.description}}
+  </ng-container>
+  <ng-container *ngIf="!result.sitelinkUrl">
+    <b>{{result.label}}</b>&nbsp;{{result.description}}
+  </ng-container>
 </p>
 
 
