@@ -28,6 +28,7 @@ export class AppComponent {
       tap(value => console.log(`Immediate Tap: "${value}"`)),
       debounceTime(500),
       tap(value => console.log(`Debounced Tap: "${value}"`)),
+      filter(value => !!value.length), // do not continue if search is empty string
       switchMap(value => this.wikidataService.searchEntities(value)),
       tap(value => console.log(`Search Results:`, value)),
       tap(value => this.searchEntitiesResults = value),
